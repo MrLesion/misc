@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEON ARCADE — intro</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      background: #05060c;
+      font-family: 'Orbitron', system-ui, sans-serif;
+      color: #cdd6ee;
+      padding: 24px;
+    }
+    #intro { width: min(1024px, 100%); }
+    .controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    label { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; }
+    input {
+      background: #0b0d18;
+      border: 1px solid #232840;
+      border-radius: 6px;
+      color: #eaffff;
+      font-family: inherit;
+      font-size: 15px;
+      letter-spacing: 1px;
+      padding: 10px 14px;
+      width: 220px;
+      outline: none;
+    }
+    input:focus { border-color: #37c8ff; }
+    button {
+      background: linear-gradient(180deg, #14304a, #0b1a2c);
+      border: 1px solid #37c8ff55;
+      border-radius: 6px;
+      color: #8fe8ff;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 11px 20px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    button:hover { border-color: #37c8ff; color: #eaffff; }
+  </style>
+</head>
+<body>
+  <div id="intro"></div>
+
+  <div class="controls">
+    <label for="game">Game name</label>
+    <input id="game" type="text" value="Tetris" maxlength="40" />
+    <button id="replay" type="button">Replay intro</button>
+  </div>
+
+  <script src="./neon-arcade-intro.js"></script>
+  <script>
+    var input = document.getElementById('game');
+    var container = '#intro';
+
+    function play() {
+      NeonArcadeIntro.mount(container, {
+        gameName: input.value.trim() || 'YOUR GAME',
+      });
+    }
+
+    document.getElementById('replay').addEventListener('click', play);
+    input.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') play();
+    });
+
+    play();
+  </script>
+</body>
+</html>
